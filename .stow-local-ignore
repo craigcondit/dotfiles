@@ -1,8 +1,10 @@
+# Comments and blank lines are allowed.
+
 RCS
 .+,v
 
 CVS
-\.\#.+		# CVS conflict files / emacs lock files
+\.\#.+       # CVS conflict files / emacs lock files
 \.cvsignore
 
 \.svn
@@ -11,11 +13,11 @@ _darcs
 
 \.git
 \.gitignore
+\.gitmodules
 
-.+~		# emacs backup files
-\#.*\#		# emacs autosave files
+.+~          # emacs backup files
+\#.*\#       # emacs autosave files
 
-^/README
 ^/README.*
 ^/LICENSE.*
 ^/COPYING
