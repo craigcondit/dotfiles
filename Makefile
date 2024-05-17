@@ -1,0 +1,3 @@
+.phony: install
+install:
+	stow .

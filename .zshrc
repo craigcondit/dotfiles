@@ -5,9 +5,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# add homebrew to path if it exist
-[ -x /usr/local/bin/brew ] && eval "$(/usr/local/bin/brew shellenv)" || true
-[ -x /opt/homebrew/bin/brew ] && eval "$(/opt/homebrew/bin/brew shellenv)" || true
 
 # set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
@@ -31,20 +28,27 @@ zinit light Aloxaf/fzf-tab
 # add in snippets
 zinit snippet OMZP::git
 zinit snippet OMZP::sudo
-zinit snippet OMZP::aws
+zinit snippet OMZP::docker
 zinit snippet OMZP::kubectl
 zinit snippet OMZP::kubectx
+zinit snippet OMZP::colored-man-pages
 zinit snippet OMZP::command-not-found
 
 # load completions
-autoload -U compinit && compinit
+autoload -Uz compinit && compinit
+
+[ -x "$(command -v kubectl)" ] && source <(kubectl completion zsh) || true
 
 zinit cdreplay -q
+
+# add homebrew to path if it exists
+[ -x /usr/local/bin/brew ] && eval "$(/usr/local/bin/brew shellenv)" || true
+[ -x /opt/homebrew/bin/brew ] && eval "$(/opt/homebrew/bin/brew shellenv)" || true
 
 # to customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# Keybindings
+# keybindings
 bindkey -e
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
@@ -74,7 +78,6 @@ alias ls='ls --color'
 alias ll='ls -la --color'
 alias k=kubectl
 alias ff=fastfetch
-complete -F __start_kubectl k
 
 # shell integrations
 [ -x "$(command -v fzf)" ] && eval "$(fzf --zsh)" || true
