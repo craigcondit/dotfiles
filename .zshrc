@@ -5,7 +5,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-
 # set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
@@ -34,14 +33,6 @@ zinit snippet OMZP::colored-man-pages
 zinit ice as"completion"; zinit snippet https://raw.githubusercontent.com/docker/cli/master/contrib/completion/zsh/_docker
 
 zinit snippet OMZP::command-not-found
-
-# add homebrew to path if it exists
-[ -x /usr/local/bin/brew ] && eval "$(/usr/local/bin/brew shellenv)" || true
-[ -x /opt/homebrew/bin/brew ] && eval "$(/opt/homebrew/bin/brew shellenv)" || true
-
-# add homebrew completions
-[ -d /usr/local/Homebrew/completions/zsh ] && zinit fpath -f /usr/local/Homebrew/completions/zsh
-[ -d /opt/homebrew/completions/zsh ] && zinit fpath -f /opt/homebrew/completions/zsh
 
 # load completions
 autoload -Uz compinit && compinit
