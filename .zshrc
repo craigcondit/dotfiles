@@ -28,22 +28,28 @@ zinit light Aloxaf/fzf-tab
 # add in snippets
 zinit snippet OMZP::git
 zinit snippet OMZP::sudo
-zinit snippet OMZP::docker
 zinit snippet OMZP::kubectl
 zinit snippet OMZP::kubectx
 zinit snippet OMZP::colored-man-pages
+zinit ice as"completion"; zinit snippet https://raw.githubusercontent.com/docker/cli/master/contrib/completion/zsh/_docker
+
 zinit snippet OMZP::command-not-found
-
-# load completions
-autoload -Uz compinit && compinit
-
-[ -x "$(command -v kubectl)" ] && source <(kubectl completion zsh) || true
-
-zinit cdreplay -q
 
 # add homebrew to path if it exists
 [ -x /usr/local/bin/brew ] && eval "$(/usr/local/bin/brew shellenv)" || true
 [ -x /opt/homebrew/bin/brew ] && eval "$(/opt/homebrew/bin/brew shellenv)" || true
+
+# add homebrew completions
+[ -d /usr/local/Homebrew/completions/zsh ] && zinit fpath -f /usr/local/Homebrew/completions/zsh
+[ -d /opt/homebrew/completions/zsh ] && zinit fpath -f /opt/homebrew/completions/zsh
+
+# load completions
+autoload -Uz compinit && compinit
+
+# add kubectl completions
+[ -x "$(command -v kubectl)" ] && source <(kubectl completion zsh) || true
+
+zinit cdreplay -q
 
 # to customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
