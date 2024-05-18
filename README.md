@@ -13,7 +13,7 @@ Using your package manager, ensure the following packages are installed:
 - fzf
 - zoxide
 
-# From $HOME, run the following:
+From your home directory, run the following:
 ```
 git clone git@bitbucket.org:insideo/dotfiles.git
 cd dotfiles
