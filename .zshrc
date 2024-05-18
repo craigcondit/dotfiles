@@ -87,3 +87,7 @@ alias ff=fastfetch
 [ -x "$(command -v fzf)" ] && eval "$(fzf --zsh)" || true
 [ -x "$(command -v zoxide)" ] && eval "$(zoxide init --cmd cd zsh)" || true
 [ -x "$(command -v kubectl)" ] && source <(kubectl completion zsh) || true
+
+# sdkman
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
