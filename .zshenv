@@ -4,8 +4,9 @@ export VISUAL=vi
 
 # path
 if [ -d $HOME/bin ]; then
-  export PATH=$HOME/bin:$PATH
+  PATH=$HOME/bin:$PATH
 fi
+export PATH
 
 # language
 export LANG=en_US.UTF-8

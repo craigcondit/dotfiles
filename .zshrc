@@ -17,35 +17,46 @@ fi
 # load zinit
 source "${ZINIT_HOME}/zinit.zsh"
 
-# add plugins
-zinit ice depth=1; zinit light romkatv/powerlevel10k
+# packages
+zinit pack"binary" for fzf
+if [ ! -e "$(dirname "$(command -v fzf)")/fzf-preview" ]; then
+  ln -s fzf "$(dirname "$(command -v fzf)")/fzf-preview"
+fi
+
+# plugins
+zinit ice depth=1
+zinit light romkatv/powerlevel10k
+
+zinit ice wait"2" as"command" from"gh-r" lucid \
+  atclone"./zoxide init zsh > init.zsh" \
+  atpull"%atclone" src="init.zsh" nocompile'!'
+zinit light ajeetdsouza/zoxide
+
+# other plugins
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
 
 # add in snippets
-zinit snippet OMZP::git
 zinit snippet OMZP::sudo
-zinit snippet OMZP::kubectl
-zinit snippet OMZP::kubectx
 zinit snippet OMZP::colored-man-pages
 zinit ice as"completion"; zinit snippet https://raw.githubusercontent.com/docker/cli/master/contrib/completion/zsh/_docker
 zinit snippet OMZP::command-not-found
 
 # add homebrew completions
-[ -d /usr/local/Homebrew/completions/zsh ] && zinit fpath -f /usr/local/Homebrew/completions/zsh
-[ -d /opt/homebrew/completions/zsh ] && zinit fpath -f /opt/homebrew/completions/zsh
+if [ -d /usr/local/Homebrew/completions/zsh ]; then zinit fpath -f /usr/local/Homebrew/completions/zsh; fi
+if [ -d /opt/homebrew/completions/zsh ]; then zinit fpath -f /opt/homebrew/completions/zsh; fi
 
 # load completions
 autoload -Uz compinit && compinit
 
 # add kubectl completions
-[ -x "$(command -v kubectl)" ] && source <(kubectl completion zsh) || true
+if [ -x "$(command -v kubectl)" ]; then source <(kubectl completion zsh); fi
 
 # homebrew
-[ -x /usr/local/bin/brew ] && eval "$(/usr/local/bin/brew shellenv)" || true
-[ -x /opt/homebrew/bin/brew ] && eval "$(/opt/homebrew/bin/brew shellenv)" || true
+if [ -x /usr/local/bin/brew ]; then eval "$(/usr/local/bin/brew shellenv)"; fi
+if [ -x /opt/homebrew/bin/brew ]; then eval "$(/opt/homebrew/bin/brew shellenv)"; fi
 
 zinit cdreplay -q
 
@@ -56,6 +67,7 @@ zinit cdreplay -q
 bindkey -e
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
+bindkey "\e[3~" delete-char
 
 # history
 HISTSIZE=10000
@@ -80,14 +92,17 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 # aliases
 alias ls='ls --color'
 alias ll='ls -la --color'
-alias k=kubectl
-alias ff=fastfetch
+if [ -x "$(command -v kubectl)" ]; then alias k=kubectl; fi
+if [ -x "$(command -v fastfetch)" ]; then alias ff=fastfetch; fi
 
 # shell integrations
-[ -x "$(command -v fzf)" ] && eval "$(fzf --zsh)" || true
-[ -x "$(command -v zoxide)" ] && eval "$(zoxide init --cmd cd zsh)" || true
-[ -x "$(command -v kubectl)" ] && source <(kubectl completion zsh) || true
+alias cd=z
+eval "$(fzf --zsh)"
+if [ -x "$(command -v kubectl)" ]; then source <(kubectl completion zsh); fi
 
 # sdkman
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+if [ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]; then
+  export SDKMAN_DIR="$HOME/.sdkman"
+  source "$HOME/.sdkman/bin/sdkman-init.sh"
+fi
+
