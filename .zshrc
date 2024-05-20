@@ -17,6 +17,11 @@ fi
 # load zinit
 source "${ZINIT_HOME}/zinit.zsh"
 
+# path
+if [ -d "$HOME/bin" ]; then
+  export PATH="$HOME/bin":$PATH
+fi
+
 # packages
 #zinit pack"binary" for fzf
 #if [ ! -e "$(dirname "$(command -v fzf)")/fzf-preview" ]; then

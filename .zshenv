@@ -2,12 +2,6 @@
 export EDITOR=vi
 export VISUAL=vi
 
-# path
-if [ -d $HOME/bin ]; then
-  PATH=$HOME/bin:$PATH
-fi
-export PATH
-
 # language
 export LANG=en_US.UTF-8
 
