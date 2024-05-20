@@ -17,11 +17,6 @@ fi
 # load zinit
 source "${ZINIT_HOME}/zinit.zsh"
 
-# path
-if [ -d "$HOME/bin" ]; then
-  export PATH="$HOME/bin":$PATH
-fi
-
 # packages
 #zinit pack"binary" for fzf
 #if [ ! -e "$(dirname "$(command -v fzf)")/fzf-preview" ]; then
@@ -49,9 +44,13 @@ zinit snippet OMZP::colored-man-pages
 zinit ice as"completion"; zinit snippet https://raw.githubusercontent.com/docker/cli/master/contrib/completion/zsh/_docker
 zinit snippet OMZP::command-not-found
 
-# add homebrew completions
+# homebrew completions
 if [ -d /usr/local/Homebrew/completions/zsh ]; then zinit fpath -f /usr/local/Homebrew/completions/zsh; fi
 if [ -d /opt/homebrew/completions/zsh ]; then zinit fpath -f /opt/homebrew/completions/zsh; fi
+
+# homebrew shell environment
+if [ -x /usr/local/bin/brew ]; then eval "$(/usr/local/bin/brew shellenv)"; fi
+if [ -x /opt/homebrew/bin/brew ]; then eval "$(/opt/homebrew/bin/brew shellenv)"; fi
 
 # load completions
 autoload -Uz compinit && compinit
@@ -59,9 +58,10 @@ autoload -Uz compinit && compinit
 # add kubectl completions
 if [ -x "$(command -v kubectl)" ]; then source <(kubectl completion zsh); fi
 
-# homebrew
-if [ -x /usr/local/bin/brew ]; then eval "$(/usr/local/bin/brew shellenv)"; fi
-if [ -x /opt/homebrew/bin/brew ]; then eval "$(/opt/homebrew/bin/brew shellenv)"; fi
+# prepend personal bin dir
+if [ -d "$HOME/bin" ]; then
+  export PATH="$HOME/bin":$PATH
+fi
 
 zinit cdreplay -q
 
