@@ -99,11 +99,14 @@ if [ -x "$(command -v eza)" ]; then
   alias ll='eza --icons=auto --git -F --group-directories-first -l'
   alias la='eza --icons=auto --git -F --group-directories-first -aa'
   alias lla='eza --icons=auto --git -F --group-directories-first -laa'
+  alias lart='eza --icons=auto --git -F -laa --sort=modified'
+  alias lstree='eza --icons=auto --git -F --group-directories-first -T'
 else
   alias ls='ls --color=auto'
   alias ll='ls -l --color=auto'
   alias la='ls --color=auto'
   alias lla='ls -la --color=auto'
+  alias lart='ls -lart --color=auto'
 fi
 
 if [ -x "$(command -v kubectl)" ]; then alias k=kubectl; fi
