@@ -84,20 +84,35 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 if [ $ZSH_USE_FZF ]; then 
   zstyle ':completion:*' menu no
-  zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
-  zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
+  if [ -x "$(command -v eza)" ]; then
+    zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza --icons=always --group-directories-first $realpath'
+    zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza --icons=always --group-directories-first $realpath'
+  else
+    zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+    zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
+  fi
 fi
 
 # aliases
-alias ls='ls --color'
-alias ll='ls -la --color'
+if [ -x "$(command -v eza)" ]; then
+  alias ls='eza --icons=auto --git -F --group-directories-first'
+  alias ll='eza --icons=auto --git -F --group-directories-first -l'
+  alias la='eza --icons=auto --git -F --group-directories-first -aa'
+  alias lla='eza --icons=auto --git -F --group-directories-first -laa'
+else
+  alias ls='ls --color=auto'
+  alias ll='ls -l --color=auto'
+  alias la='ls --color=auto'
+  alias lla='ls -la --color=auto'
+fi
+
 if [ -x "$(command -v kubectl)" ]; then alias k=kubectl; fi
 if [ -x "$(command -v fastfetch)" ]; then alias ff=fastfetch; fi
 
 # shell integrations
 if [ $ZSH_USE_FZF ]; then
-  eval "$(zoxide init zsh)"
   eval "$(fzf --zsh)"
+  eval "$(zoxide init zsh)"
   alias cd=z
 fi
 if [ -x "$(command -v kubectl)" ]; then source <(kubectl completion zsh); fi
