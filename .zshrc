@@ -109,6 +109,10 @@ else
   alias lart='ls -lart --color=auto'
 fi
 
+if [ -x "$(command -v batcat)" ] && [ ! -x "$(command -v bat)" ]; then
+  alias bat='batcat'
+fi
+
 if [ -x "$(command -v kubectl)" ]; then alias k=kubectl; fi
 if [ -x "$(command -v fastfetch)" ]; then alias ff=fastfetch; fi
 
