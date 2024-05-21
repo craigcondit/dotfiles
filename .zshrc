@@ -95,12 +95,12 @@ fi
 
 # aliases
 if [ -x "$(command -v eza)" ]; then
-  alias ls='eza --icons=auto --git -F --group-directories-first'
-  alias ll='eza --icons=auto --git -F --group-directories-first -l'
-  alias la='eza --icons=auto --git -F --group-directories-first -aa'
-  alias lla='eza --icons=auto --git -F --group-directories-first -laa'
-  alias lart='eza --icons=auto --git -F -laa --sort=modified'
-  alias lstree='eza --icons=auto --git -F --group-directories-first -T'
+  alias ls='eza --icons=auto --git -F --group --group-directories-first'
+  alias ll='eza --icons=auto --git -F --group --group-directories-first -l'
+  alias la='eza --icons=auto --git -F --group --group-directories-first -aa'
+  alias lla='eza --icons=auto --git -F --group --group-directories-first -laa'
+  alias lart='eza --icons=auto --git -F --group -laa --sort=modified'
+  alias lstree='eza --icons=auto --git -F --group --group-directories-first -T'
 else
   alias ls='ls --color=auto'
   alias ll='ls -l --color=auto'
