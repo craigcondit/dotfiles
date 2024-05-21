@@ -17,28 +17,16 @@ fi
 # load zinit
 source "${ZINIT_HOME}/zinit.zsh"
 
-# packages
-#zinit pack"binary" for fzf
-#if [ ! -e "$(dirname "$(command -v fzf)")/fzf-preview" ]; then
-#  ln -s fzf "$(dirname "$(command -v fzf)")/fzf-preview"
-#fi
-
 # plugins
 zinit ice depth=1
 zinit light romkatv/powerlevel10k
-
-#zinit ice wait"2" as"command" from"gh-r" lucid \
-#  atclone"./zoxide init zsh > init.zsh" \
-#  atpull"%atclone" src="init.zsh" nocompile'!'
-#zinit light ajeetdsouza/zoxide
 
 # other plugins
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
-#zinit light Aloxaf/fzf-tab
 
-# add in snippets
+# snippets
 zinit snippet OMZP::sudo
 zinit snippet OMZP::colored-man-pages
 zinit ice as"completion"; zinit snippet https://raw.githubusercontent.com/docker/cli/master/contrib/completion/zsh/_docker
@@ -90,9 +78,6 @@ setopt hist_find_no_dups
 # completion styling
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-#zstyle ':completion:*' menu no
-#zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
-#zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 # aliases
 alias ls='ls --color'
@@ -101,8 +86,6 @@ if [ -x "$(command -v kubectl)" ]; then alias k=kubectl; fi
 if [ -x "$(command -v fastfetch)" ]; then alias ff=fastfetch; fi
 
 # shell integrations
-#alias cd=z
-#eval "$(fzf --zsh)"
 if [ -x "$(command -v kubectl)" ]; then source <(kubectl completion zsh); fi
 
 # sdkman
