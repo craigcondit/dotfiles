@@ -17,26 +17,15 @@ fi
 # load zinit
 source "${ZINIT_HOME}/zinit.zsh"
 
-# packages
-#zinit pack"binary" for fzf
-#if [ ! -e "$(dirname "$(command -v fzf)")/fzf-preview" ]; then
-#  ln -s fzf "$(dirname "$(command -v fzf)")/fzf-preview"
-#fi
-
 # plugins
 zinit ice depth=1
 zinit light romkatv/powerlevel10k
 
-#zinit ice wait"2" as"command" from"gh-r" lucid \
-#  atclone"./zoxide init zsh > init.zsh" \
-#  atpull"%atclone" src="init.zsh" nocompile'!'
-#zinit light ajeetdsouza/zoxide
-
-# other plugins
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
-#zinit light Aloxaf/fzf-tab
+
+if [ $ZSH_USE_FZF ]; then zinit light Aloxaf/fzf-tab; fi
 
 # add in snippets
 zinit snippet OMZP::sudo
@@ -49,8 +38,11 @@ if [ -d /usr/local/Homebrew/completions/zsh ]; then zinit fpath -f /usr/local/Ho
 if [ -d /opt/homebrew/completions/zsh ]; then zinit fpath -f /opt/homebrew/completions/zsh; fi
 
 # homebrew shell environment
-if [ -x /usr/local/bin/brew ]; then eval "$(/usr/local/bin/brew shellenv)"; fi
-if [ -x /opt/homebrew/bin/brew ]; then eval "$(/opt/homebrew/bin/brew shellenv)"; fi
+if [ -x /usr/local/bin/brew ]; then
+  eval "$(/usr/local/bin/brew shellenv)"
+elif [ -x /opt/homebrew/bin/brew ]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
 
 # load completions
 autoload -Uz compinit && compinit
@@ -90,9 +82,11 @@ setopt hist_find_no_dups
 # completion styling
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-#zstyle ':completion:*' menu no
-#zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
-#zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
+if [ $ZSH_USE_FZF ]; then 
+  zstyle ':completion:*' menu no
+  zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+  zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
+fi
 
 # aliases
 alias ls='ls --color'
@@ -101,8 +95,11 @@ if [ -x "$(command -v kubectl)" ]; then alias k=kubectl; fi
 if [ -x "$(command -v fastfetch)" ]; then alias ff=fastfetch; fi
 
 # shell integrations
-#alias cd=z
-#eval "$(fzf --zsh)"
+if [ $ZSH_USE_FZF ]; then
+  eval "$(zoxide init zsh)"
+  eval "$(fzf --zsh)"
+  alias cd=z
+fi
 if [ -x "$(command -v kubectl)" ]; then source <(kubectl completion zsh); fi
 
 # sdkman
