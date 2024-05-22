@@ -122,6 +122,10 @@ if [ $ZSH_USE_FZF ]; then
   eval "$(zoxide init zsh)"
   alias cd=z
 fi
+if [ $ZSH_USE_NVIM ]; then
+	alias vi=nvim
+fi
+
 if [ -x "$(command -v kubectl)" ]; then source <(kubectl completion zsh); fi
 
 # sdkman
