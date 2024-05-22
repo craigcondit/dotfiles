@@ -1,4 +1,4 @@
-# execute remaining code only on MacOS (Darwin)
+# execute below code only on MacOS (Darwin)
 if [[ "$(uname)" == "Darwin" ]]; then
 
 	# add homebrew to path if it exists

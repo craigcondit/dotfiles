@@ -20,6 +20,8 @@ _darcs
 
 .*\.swp	     # swap files
 
+lazy-lock.json
+
 ^/README.*
 ^/LICENSE.*
 ^/COPYING
