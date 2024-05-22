@@ -16,6 +16,5 @@ if [[ "$(uname)" == "Darwin" ]]; then
 	if [ -x "$(command -v nvim)" ]; then
 		export EDITOR=nvim
 		export VISUAL=nvim
-		export ZSH_USE_NVIM=1
 	fi
 fi
