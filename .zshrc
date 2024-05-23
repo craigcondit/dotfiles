@@ -131,3 +131,5 @@ if [ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]; then
   source "$HOME/.sdkman/bin/sdkman-init.sh"
 fi
 
+# ensure GPG can find the right tty
+export GPG_TTY=$(tty)
