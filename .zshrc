@@ -118,6 +118,7 @@ fi
 
 if [ -x "$(command -v kubectl)" ]; then alias k=kubectl; fi
 if [ -x "$(command -v fastfetch)" ]; then alias ff=fastfetch; fi
+if [ -x "$(command -v fdfind)" ]; then alias f=fdfind ; fi
 
 # shell integrations
 if [ $ZSH_USE_FZF ]; then
