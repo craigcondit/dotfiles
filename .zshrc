@@ -1,3 +1,6 @@
+# ensure GPG can find the right tty
+export GPG_TTY=$(tty)
+
 # enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -130,6 +133,3 @@ if [ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]; then
   export SDKMAN_DIR="$HOME/.sdkman"
   source "$HOME/.sdkman/bin/sdkman-init.sh"
 fi
-
-# ensure GPG can find the right tty
-export GPG_TTY=$(tty)
