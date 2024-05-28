@@ -125,6 +125,9 @@ if [ $ZSH_USE_FZF ]; then
   eval "$(fzf --zsh)"
   eval "$(zoxide init zsh)"
   alias cd=z
+elif [ -x "$(command -v zoxide)" ]; then
+  eval "$(zoxide init zsh)"
+  alias cd=z
 fi
 
 if [ -x "$(command -v kubectl)" ]; then source <(kubectl completion zsh); fi
