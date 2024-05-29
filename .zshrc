@@ -81,10 +81,12 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 if [ -x "$(command -v fzf)" ]; then
   zstyle ':completion:*' menu no
   if [ -x "$(command -v eza)" ]; then
-    zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza --icons=always --group-directories-first $realpath'
-    zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza --icons=always --group-directories-first $realpath'
+    zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza --icons=always -1 --group-directories-first $realpath'
+    zstyle ':fzf-tab:complete:z:*' fzf-preview 'eza --icons=always -1 --group-directories-first $realpath'
+    zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza -1 --icons=always --group-directories-first $realpath'
   else
     zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+    zstyle ':fzf-tab:complete:z:*' fzf-preview 'ls --color $realpath'
     zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
   fi
 fi
