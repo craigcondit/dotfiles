@@ -51,9 +51,6 @@ export PATH="${HOME}/bin":$PATH
 # load completions
 autoload -Uz compinit && compinit
 
-# add kubectl completions
-if [ -x "$(command -v kubectl)" ]; then source <(kubectl completion zsh); fi
-
 zinit cdreplay -q
 
 # to customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
@@ -120,15 +117,11 @@ elif [ -x "$(command -v fd)" ]; then
   alias f=fd
 fi
 
-# shell integrations
-if [ -x "$(command -v fzf)" ]; then
-  eval "$(fzf --zsh)"
-fi
-if [ -x "$(command -v zoxide)" ]; then
-  eval "$(zoxide init zsh)"
-  alias cd=z
-fi
+alias v="${EDITOR}"
 
+# shell integrations
+if [ -x "$(command -v fzf)" ]; then eval "$(fzf --zsh)"; fi
+if [ -x "$(command -v zoxide)" ]; then eval "$(zoxide init zsh)"; alias cd=z; fi
 if [ -x "$(command -v kubectl)" ]; then source <(kubectl completion zsh); fi
 
 # sdkman
@@ -137,4 +130,5 @@ if [ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]; then
   source "$HOME/.sdkman/bin/sdkman-init.sh"
 fi
 
+# this comes last, to ensure all completions have registered
 zinit light Aloxaf/fzf-tab
