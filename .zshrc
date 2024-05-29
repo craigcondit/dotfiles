@@ -26,7 +26,6 @@ zinit light zdharma-continuum/zinit-annex-patch-dl
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
-zinit light Aloxaf/fzf-tab
 
 # add in snippets
 zinit snippet OMZP::sudo
@@ -82,7 +81,7 @@ setopt hist_find_no_dups
 # completion styling
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-if [ $ZSH_USE_FZF ]; then 
+if [ -x "$(command -v fzf)" ]; then
   zstyle ':completion:*' menu no
   if [ -x "$(command -v eza)" ]; then
     zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza --icons=always --group-directories-first $realpath'
@@ -122,11 +121,10 @@ elif [ -x "$(command -v fd)" ]; then
 fi
 
 # shell integrations
-if [ $ZSH_USE_FZF ]; then
+if [ -x "$(command -v fzf)" ]; then
   eval "$(fzf --zsh)"
-  eval "$(zoxide init zsh)"
-  alias cd=z
-elif [ -x "$(command -v zoxide)" ]; then
+fi
+if [ -x "$(command -v zoxide)" ]; then
   eval "$(zoxide init zsh)"
   alias cd=z
 fi
@@ -138,3 +136,5 @@ if [ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]; then
   export SDKMAN_DIR="$HOME/.sdkman"
   source "$HOME/.sdkman/bin/sdkman-init.sh"
 fi
+
+zinit light Aloxaf/fzf-tab
