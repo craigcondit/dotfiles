@@ -47,16 +47,34 @@ elif [ -x /opt/homebrew/bin/brew ]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
+# attempt to install local FZF binary if on linux
+if [ ! $ZSH_USE_FZF ] && [[ "$(uname)" == "Linux" ]]; then
+	case "$(uname -m)" in
+	armv7*)
+	fzf_arch=armv7
+	;;
+	x86_64)
+	fzf_arch=amd64
+	;;
+	aarch64)
+	fzf_arch=arm64
+	;;
+	esac
+	if [ ! -z "${fzf_arch}" ]; then
+		zinit pack"binary" for fzf
+		export ZSH_USE_FZF=1
+	fi
+fi
+
+# prepend personal bin dir
+if [ ! -d "${HOME}/bin" ]; then mkdir -p "${HOME}/bin" ; fi
+export PATH="${HOME}/bin":$PATH
+
 # load completions
 autoload -Uz compinit && compinit
 
 # add kubectl completions
 if [ -x "$(command -v kubectl)" ]; then source <(kubectl completion zsh); fi
-
-# prepend personal bin dir
-if [ -d "$HOME/bin" ]; then
-  export PATH="$HOME/bin":$PATH
-fi
 
 zinit cdreplay -q
 
