@@ -21,15 +21,12 @@ fi
 source "${ZINIT_HOME}/zinit.zsh"
 
 # plugins
-zinit ice depth=1
-zinit light romkatv/powerlevel10k
-
+zinit ice depth=1 ; zinit light romkatv/powerlevel10k
+zinit light zdharma-continuum/zinit-annex-patch-dl
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
-zinit light zdharma-continuum/zinit-annex-patch-dl
-
-if [ $ZSH_USE_FZF ]; then zinit light Aloxaf/fzf-tab; fi
+zinit light Aloxaf/fzf-tab
 
 # add in snippets
 zinit snippet OMZP::sudo
@@ -46,25 +43,6 @@ if [ -x /usr/local/bin/brew ]; then
   eval "$(/usr/local/bin/brew shellenv)"
 elif [ -x /opt/homebrew/bin/brew ]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
-fi
-
-# attempt to install local FZF binary if on linux
-if [ ! $ZSH_USE_FZF ] && [[ "$(uname)" == "Linux" ]]; then
-	case "$(uname -m)" in
-	armv7*)
-	fzf_arch=armv7
-	;;
-	x86_64)
-	fzf_arch=amd64
-	;;
-	aarch64)
-	fzf_arch=arm64
-	;;
-	esac
-	if [ ! -z "${fzf_arch}" ]; then
-		zinit pack"bgn" for fzf
-		export ZSH_USE_FZF=1
-	fi
 fi
 
 # prepend personal bin dir
