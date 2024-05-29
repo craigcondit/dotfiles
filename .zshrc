@@ -27,6 +27,7 @@ zinit light romkatv/powerlevel10k
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
+zinit light zdharma-continuum/zinit-annex-patch-dl
 
 if [ $ZSH_USE_FZF ]; then zinit light Aloxaf/fzf-tab; fi
 
@@ -61,7 +62,7 @@ if [ ! $ZSH_USE_FZF ] && [[ "$(uname)" == "Linux" ]]; then
 	;;
 	esac
 	if [ ! -z "${fzf_arch}" ]; then
-		zinit pack"binary" for fzf
+		zinit pack"bgn" for fzf
 		export ZSH_USE_FZF=1
 	fi
 fi
