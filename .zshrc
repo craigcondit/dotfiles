@@ -93,12 +93,21 @@ fi
 
 # aliases
 if [ -x "$(command -v eza)" ]; then
-  alias ls='eza --icons=auto --git -F --group --group-directories-first'
-  alias ll='eza --icons=auto --git -F --group --group-directories-first -l'
-  alias la='eza --icons=auto --git -F --group --group-directories-first -aa'
-  alias lla='eza --icons=auto --git -F --group --group-directories-first -laa'
-  alias lart='eza --icons=auto --git -F --group -laa --sort=modified'
-  alias lstree='eza --icons=auto --git -F --group --group-directories-first -T'
+  if command eza --git "$(command -v eza)" >/dev/null 2>/dev/null ; then
+    alias ls='eza --icons=auto --git -F --group --group-directories-first'
+    alias ll='eza --icons=auto --git -F --group --group-directories-first -l'
+    alias la='eza --icons=auto --git -F --group --group-directories-first -aa'
+    alias lla='eza --icons=auto --git -F --group --group-directories-first -laa'
+    alias lart='eza --icons=auto --git -F --group -laa --sort=modified'
+    alias lstree='eza --icons=auto --git -F --group --group-directories-first -T'
+  else
+    alias ls='eza --icons=auto -F --group --group-directories-first'
+    alias ll='eza --icons=auto -F --group --group-directories-first -l'
+    alias la='eza --icons=auto -F --group --group-directories-first -aa'
+    alias lla='eza --icons=auto -F --group --group-directories-first -laa'
+    alias lart='eza --icons=auto -F --group -laa --sort=modified'
+    alias lstree='eza --icons=auto -F --group --group-directories-first -T'
+  fi
 else
   alias ls='ls --color=auto'
   alias ll='ls -l --color=auto'
