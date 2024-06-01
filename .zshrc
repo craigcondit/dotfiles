@@ -121,7 +121,7 @@ elif [ -x "$(command -v fd)" ]; then
 fi
 
 alias v="${EDITOR}"
-if [ ! -z "${PAGER}" ]; then alias p=${PAGER}; fi
+if [ ! -z "${PAGER}" ]; then alias pager="${PAGER}" ; alias p="${PAGER}"; fi
 
 # shell integrations
 if [ -x "$(command -v fzf)" ]; then eval "$(fzf --zsh)"; fi
