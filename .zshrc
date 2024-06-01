@@ -93,13 +93,13 @@ fi
 
 # aliases
 if [ -x "$(command -v lsd)" ]; then
-  alias ls='lsd --color=auto'
-  alias ll='lsd -l --color=auto'
-  alias la='lsd --color=auto'
-  alias lla='lsd -la --color=auto'
-  alias lart='lsd -lart --color=auto'
-  alias lstree='lsd --tree --color=auto'
-  alias lltree='lsd -l --tree --color=auto'
+  alias ls='lsd --color=auto --git'
+  alias ll='lsd -l --color=auto --git'
+  alias la='lsd --color=auto --git'
+  alias lla='lsd -la --color=auto --git'
+  alias lart='lsd -lart --color=auto --git'
+  alias lstree='lsd --tree --color=auto --git'
+  alias lltree='lsd -l --tree --color=auto --git'
 else
   alias ls='ls --color=auto'
   alias ll='ls -l --color=auto'
