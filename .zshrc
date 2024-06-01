@@ -80,7 +80,11 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 if [ -x "$(command -v fzf)" ]; then
   zstyle ':completion:*' menu no
-  if [ -x "$(command -v eza)" ]; then
+  if [ -z "$(command -v lsd)" ]; then
+    zstyle ':fzf-tab:complete:cd:*' fzf-preview 'lsd --color $realpath'
+    zstyle ':fzf-tab:complete:z:*' fzf-preview 'lsd --color $realpath'
+    zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'lsd --color $realpath'
+  elif [ -x "$(command -v eza)" ]; then
     zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza --icons=always -1 --group-directories-first $realpath'
     zstyle ':fzf-tab:complete:z:*' fzf-preview 'eza --icons=always -1 --group-directories-first $realpath'
     zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza -1 --icons=always --group-directories-first $realpath'
@@ -92,7 +96,13 @@ if [ -x "$(command -v fzf)" ]; then
 fi
 
 # aliases
-if [ -x "$(command -v eza)" ]; then
+if [ -x "$(command -v lsd)" ]; then
+  alias ls='lsd --color=auto'
+  alias ll='lsd -l --color=auto'
+  alias la='lsd --color=auto'
+  alias lla='lsd -la --color=auto'
+  alias lart='lsd -lart --color=auto'
+elif [ -x "$(command -v eza)" ]; then
   if command eza --git "$(command -v eza)" >/dev/null 2>/dev/null ; then
     alias ls='eza --icons=auto --git -F --group --group-directories-first'
     alias ll='eza --icons=auto --git -F --group --group-directories-first -l'
