@@ -84,10 +84,6 @@ if [ -x "$(command -v fzf)" ]; then
     zstyle ':fzf-tab:complete:cd:*' fzf-preview 'lsd --color $realpath'
     zstyle ':fzf-tab:complete:z:*' fzf-preview 'lsd --color $realpath'
     zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'lsd --color $realpath'
-  elif [ -x "$(command -v eza)" ]; then
-    zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza --icons=always -1 --group-directories-first $realpath'
-    zstyle ':fzf-tab:complete:z:*' fzf-preview 'eza --icons=always -1 --group-directories-first $realpath'
-    zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza -1 --icons=always --group-directories-first $realpath'
   else
     zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
     zstyle ':fzf-tab:complete:z:*' fzf-preview 'ls --color $realpath'
@@ -102,22 +98,8 @@ if [ -x "$(command -v lsd)" ]; then
   alias la='lsd --color=auto'
   alias lla='lsd -la --color=auto'
   alias lart='lsd -lart --color=auto'
-elif [ -x "$(command -v eza)" ]; then
-  if command eza --git "$(command -v eza)" >/dev/null 2>/dev/null ; then
-    alias ls='eza --icons=auto --git -F --group --group-directories-first'
-    alias ll='eza --icons=auto --git -F --group --group-directories-first -l'
-    alias la='eza --icons=auto --git -F --group --group-directories-first -aa'
-    alias lla='eza --icons=auto --git -F --group --group-directories-first -laa'
-    alias lart='eza --icons=auto --git -F --group -laa --sort=modified'
-    alias lstree='eza --icons=auto --git -F --group --group-directories-first -T'
-  else
-    alias ls='eza --icons=auto -F --group --group-directories-first'
-    alias ll='eza --icons=auto -F --group --group-directories-first -l'
-    alias la='eza --icons=auto -F --group --group-directories-first -aa'
-    alias lla='eza --icons=auto -F --group --group-directories-first -laa'
-    alias lart='eza --icons=auto -F --group -laa --sort=modified'
-    alias lstree='eza --icons=auto -F --group --group-directories-first -T'
-  fi
+  alias lstree='lsd --tree --color=auto'
+  alias lltree='lsd -l --tree --color=auto'
 else
   alias ls='ls --color=auto'
   alias ll='ls -l --color=auto'
