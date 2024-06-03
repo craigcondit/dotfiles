@@ -44,9 +44,14 @@ elif [ -x /opt/homebrew/bin/brew ]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
+# append /usr/local/bin
+if [[ ! "$PATH" == ?(*:)"/usr/local/bin"?(:*) ]]; then
+	PATH="${PATH}:/usr/local/bin"
+fi
+
 # prepend personal bin dir
 if [ ! -d "${HOME}/bin" ]; then mkdir -p "${HOME}/bin" ; fi
-export PATH="${HOME}/bin":$PATH
+export PATH="${HOME}/bin:${PATH}"
 
 # load completions
 autoload -Uz compinit && compinit
