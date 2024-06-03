@@ -45,7 +45,7 @@ elif [ -x /opt/homebrew/bin/brew ]; then
 fi
 
 # append /usr/local/bin
-if [[ ! $PATH =~ /usr/local/bin ]]; then
+if [[ ! $PATH =~ (^|:)/usr/local/bin(:|$) ]]; then
 	PATH="${PATH}:/usr/local/bin"
 fi
 
