@@ -80,15 +80,17 @@ setopt hist_save_no_dups
 setopt hist_ignore_dups
 setopt hist_find_no_dups
 
+rehash
+
 # completion styling
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 if [ -x "$(command -v fzf)" ]; then
   zstyle ':completion:*' menu no
-  if [ -z "$(command -v lsd)" ]; then
-    zstyle ':fzf-tab:complete:cd:*' fzf-preview 'lsd --color $realpath'
-    zstyle ':fzf-tab:complete:z:*' fzf-preview 'lsd --color $realpath'
-    zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'lsd --color $realpath'
+  if [ -x "$(command -v lsd)" ]; then
+    zstyle ':fzf-tab:complete:cd:*' fzf-preview 'lsd --color=always --icon=always $realpath'
+    zstyle ':fzf-tab:complete:z:*' fzf-preview 'lsd --color=always --icon=always $realpath'
+    zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'lsd --color=always --icon=always $realpath'
   else
     zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
     zstyle ':fzf-tab:complete:z:*' fzf-preview 'ls --color $realpath'
