@@ -44,11 +44,11 @@ cd "${var_dir}"
 for file in default.sh "${platform}.sh" "${release}.sh" "${hostname_short}.sh" "${hostname_full}.sh" ; do
 	if [ -r "${file}" ]; then
   	set -a
-		. "${file}"
+		. "./${file}"
 		set +a
 	fi
 done
 
 # replace vars
-envsubst <&0 >&1
+envsubst
 
