@@ -36,7 +36,7 @@ font:
     style: Light Italic
   bold_italic:
     style: Italic
-  size: 13
+  size: ${ALACRITTY__FONT_SIZE}
 
 colors:
   primary:
