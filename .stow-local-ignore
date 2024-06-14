@@ -27,3 +27,6 @@ lazy-lock.json
 ^/COPYING
 
 ^/Makefile
+^/templates
+^/vars
+^/bin

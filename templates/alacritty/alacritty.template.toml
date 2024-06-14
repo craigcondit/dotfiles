@@ -27,7 +27,7 @@ normal = { family = "RobotoMono Nerd Font Mono", style = "Light" }
 bold = { style = "Regular" }
 italic = { style = "Light Italic" }
 bold_italic = { style = "Italic" }
-size = 16
+size = ${ALACRITTY__FONT_SIZE}
 
 [colors.primary]
 foreground = "#fba709"
