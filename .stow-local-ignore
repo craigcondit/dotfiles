@@ -19,6 +19,7 @@ _darcs
 \#.*\#       # emacs autosave files
 
 .*\.swp	     # swap files
+.*\.tmp      # temp files
 
 lazy-lock.json
 
