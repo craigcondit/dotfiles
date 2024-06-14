@@ -40,4 +40,5 @@ pull:
 	git pull
 
 .phony: all
-all: pull install
+all: pull
+	make install
