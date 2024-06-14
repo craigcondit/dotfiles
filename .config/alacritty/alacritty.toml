@@ -23,8 +23,10 @@ color = "0xffffff"
 history = 10000
 
 [font]
-normal = { family = "SauceCodePro Nerd Font Mono", style = "Light" }
+normal = { family = "RobotoMono Nerd Font Mono", style = "Light" }
 bold = { style = "Regular" }
+italic = { style = "Light Italic" }
+bold_italic = { style = "Italic" }
 size = 16
 
 [colors.primary]
