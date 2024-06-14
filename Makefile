@@ -18,3 +18,9 @@ ${HOME}/.tmux/plugins/tpm:
 	@echo "Cloning tmux-plugins/tpm..."
 	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
+.phony: pull
+pull:
+	git pull
+
+.phony: all
+all: pull install
