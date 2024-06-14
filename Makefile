@@ -23,14 +23,14 @@ ${HOME}/.tmux/plugins/tpm:
 .phony: alacritty
 alacritty: .config/alacritty/alacritty.toml .config/alacritty/alacritty.yml
 
-.config/alacritty/alacritty.toml: $(find vars/alacritty -type f) templates/alacritty/alacritty.template.toml
+.config/alacritty/alacritty.toml: bin/vars.sh $(shell find vars/alacritty -type f) templates/alacritty/alacritty.template.toml
 	@echo "Generating alacritty.toml..."
 	@mkdir -p .config/alacritty
 	@bin/vars.sh alacritty < templates/alacritty/alacritty.template.toml > "${TMPDIR}/alacritty.toml"
 	@cp -f "${TMPDIR}/alacritty.toml" .config/alacritty/alacritty.toml
 	@chmod 644 .config/alacritty/alacritty.toml
 
-.config/alacritty/alacritty.yml: $(find vars/alacritty -type f) templates/alacritty/alacritty.template.yml
+.config/alacritty/alacritty.yml: bin/vars.sh $(shell find vars/alacritty -type f) templates/alacritty/alacritty.template.yml
 	@echo "Generating alacritty.yml..."
 	@mkdir -p .config/alacritty
 	@bin/vars.sh alacritty < templates/alacritty/alacritty.template.yml > "${TMPDIR}/alacritty.yml"
