@@ -1,12 +1,12 @@
 .phony: install
-install: ${HOME}/.config ${HOME}/.config/.alacritty ${HOME}/.config/nvim ${HOME}/.config/tmux ${HOME}/.tmux/plugins/tpm
+install: ${HOME}/.config ${HOME}/.config/alacritty ${HOME}/.config/nvim ${HOME}/.config/tmux ${HOME}/.tmux/plugins/tpm
 	@stow .
 
 ${HOME}/.config:
 	mkdir -p "${HOME}/.config"
 
-${HOME}/.config/.alacritty:
-	mkdir -p "${HOME}/.config/.alacritty"
+${HOME}/.config/alacritty:
+	mkdir -p "${HOME}/.config/alacritty"
 
 ${HOME}/.config/nvim:
 	mkdir -p "${HOME}/.config/nvim"
