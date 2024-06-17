@@ -13,6 +13,7 @@ dynamic_title = true
 dynamic_padding = true
 dimensions = { columns = 132, lines = 40 }
 resize_increments = true
+option_as_alt = "Both"
 
 [bell]
 animation = "EaseOutExpo"
