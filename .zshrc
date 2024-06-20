@@ -130,10 +130,8 @@ fi
 alias v="${EDITOR}"
 
 # pager
-if [ -x "$(command -v most)" ]; then
-  export PAGER=most
-elif [ -x "$(command -v less)" ]; then
-  export PAGER=less
+if [ -x "$(command -v less)" ]; then
+  export PAGER="less -FRX"
 else
   export PAGER=more
 fi
