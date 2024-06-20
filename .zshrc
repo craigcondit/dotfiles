@@ -152,5 +152,12 @@ if [ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]; then
   source "$HOME/.sdkman/bin/sdkman-init.sh"
 fi
 
+# load .d files
+if [ -d "${HOME}/.zshrc.d" ]; then
+  for rc in "${HOME}"/.zshrc.d/*.zsh(N) ; do
+    source "${rc}"
+  done
+fi
+
 # this comes last, to ensure all completions have registered
 zinit light Aloxaf/fzf-tab
