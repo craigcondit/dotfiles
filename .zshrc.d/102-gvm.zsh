@@ -6,5 +6,5 @@
 		curl --silent -L "${gvm_url}" > "${HOME}/bin/gvm" && chmod +x "${HOME}/bin/gvm"
 	fi
 )
-export PATH="${HOME}/.gvm/go/bin:${PATH}"
+export PATH="${HOME}/.gvm/go/bin:${PATH}:${HOME}/go/bin"
 rehash
