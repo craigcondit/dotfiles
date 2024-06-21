@@ -3,7 +3,7 @@
 	gvm_url=https://github.com/devnw/gvm/releases/download/${gvm_version}/gvm
 
 	if [ ! -x "${HOME}/bin/gvm" ]; then
-		curl -q -L "${gvm_url}" > "${HOME}/bin/gvm" && chmod +x "${HOME}/bin/gvm"
+		curl --silent -L "${gvm_url}" > "${HOME}/bin/gvm" && chmod +x "${HOME}/bin/gvm"
 	fi
 )
 export PATH="${HOME}/.gvm/go/bin:${PATH}"
