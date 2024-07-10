@@ -8,5 +8,11 @@ if [ ! -x "${HOME}/go/bin/g" ]; then
 		curl -L --silent "${g_url}" > "${HOME}/go/bin/g" && chmod +x "${HOME}/go/bin/g"
 	)
 fi
-export PATH="${GOROOT}/bin:${PATH}:${GOPATH}/bin"
+
+if [[ ":$PATH:" != *":${GOROOT}/bin:"* ]]; then
+	export PATH="${GOROOT}/bin:${PATH}"
+fi
+if [[ ":$PATH:" != *":${GOPATH}/bin:"* ]]; then
+  export PATH="${PATH}:${GOPATH}/bin"
+fi
 rehash

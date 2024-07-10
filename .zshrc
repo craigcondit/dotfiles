@@ -38,20 +38,22 @@ if [ -d /usr/local/Homebrew/completions/zsh ]; then zinit fpath -f /usr/local/Ho
 if [ -d /opt/homebrew/completions/zsh ]; then zinit fpath -f /opt/homebrew/completions/zsh; fi
 
 # homebrew shell environment
-if [ -x /usr/local/bin/brew ]; then
+if [ -x /usr/local/bin/brew ] && [ ! $(command -v brew) ]; then
   eval "$(/usr/local/bin/brew shellenv)"
-elif [ -x /opt/homebrew/bin/brew ]; then
+elif [ -x /opt/homebrew/bin/brew ] && [ ! $(command -v brew) ]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
 # append /usr/local/bin
-if [[ ! $PATH =~ (^|:)/usr/local/bin(:|$) ]]; then
+if [[ "*:$PATH:*" != *":/usr/local/bin:"* ]]; then
 	PATH="${PATH}:/usr/local/bin"
 fi
 
 # prepend personal bin dir
 if [ ! -d "${HOME}/bin" ]; then mkdir -p "${HOME}/bin" ; fi
-export PATH="${HOME}/bin:${PATH}"
+if [[ "*:$PATH:*" != *":${HOME}/bin:"* ]]; then
+	export PATH="${HOME}/bin:${PATH}"
+fi
 
 # load completions
 autoload -Uz compinit && compinit

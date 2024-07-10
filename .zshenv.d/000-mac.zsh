@@ -1,10 +1,15 @@
 # execute below code only on MacOS (Darwin)
 if [[ "$(uname)" == "Darwin" ]]; then
+	# reset path for login shells
+	if [[ -o login ]]; then
+		eval `PATH="" MANPATH="" /usr/libexec/path_helper -s`
+	  rehash
+	fi
 
 	# add homebrew to path if it exists
-	if [ -x /usr/local/bin/brew ]; then
+	if [ -x /usr/local/bin/brew ] && [ ! $(command -v brew) ]; then
 		eval "$(/usr/local/bin/brew shellenv)"
-	elif [ -x /opt/homebrew/bin/brew ]; then
+	elif [ -x /opt/homebrew/bin/brew ] && [ ! $(command -v brew) ]; then
 		eval "$(/opt/homebrew/bin/brew shellenv)"
 	fi
 
