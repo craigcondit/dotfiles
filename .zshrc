@@ -38,21 +38,36 @@ if [ -d /usr/local/Homebrew/completions/zsh ]; then zinit fpath -f /usr/local/Ho
 if [ -d /opt/homebrew/completions/zsh ]; then zinit fpath -f /opt/homebrew/completions/zsh; fi
 
 # homebrew shell environment
-if [ -x /usr/local/bin/brew ] && [ ! $(command -v brew) ]; then
+if [ -x /usr/local/bin/brew ]; then
   eval "$(/usr/local/bin/brew shellenv)"
-elif [ -x /opt/homebrew/bin/brew ] && [ ! $(command -v brew) ]; then
+elif [ -x /opt/homebrew/bin/brew ]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
-# append /usr/local/bin
-if [[ "*:$PATH:*" != *":/usr/local/bin:"* ]]; then
-	PATH="${PATH}:/usr/local/bin"
+# prepend /usr/local/bin and /usr/local/sbin
+if [ -d /usr/local/bin ] && [[ "*:$PATH:*" != *":/usr/local/bin:"* ]]; then
+	PATH="/usr/local/bin:${PATH}"
+fi
+if [ -d /usr/local/sbin ] && [[ "*:$PATH:*" != *":/usr/local/sbin:"* ]]; then
+	PATH="/usr/local/sbin:${PATH}"
 fi
 
 # prepend personal bin dir
 if [ ! -d "${HOME}/bin" ]; then mkdir -p "${HOME}/bin" ; fi
 if [[ "*:$PATH:*" != *":${HOME}/bin:"* ]]; then
 	export PATH="${HOME}/bin:${PATH}"
+fi
+
+rehash
+
+# enable FZF integration if required components exist
+if [ -x "$(command -v fzf)" ] && [ -x "$(command -v zoxide)" ]; then
+	export ZSH_USE_FZF=1
+fi
+
+if [ -x "$(command -v nvim)" ]; then
+	export EDITOR=nvim
+	export VISUAL=nvim
 fi
 
 # load completions
