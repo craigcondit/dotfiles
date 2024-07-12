@@ -161,3 +161,6 @@ fi
 
 # this comes last, to ensure all completions have registered
 zinit light Aloxaf/fzf-tab
+
+# use nomatch
+setopt +o nomatch
