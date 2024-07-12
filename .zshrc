@@ -38,9 +38,9 @@ if [ -d /usr/local/Homebrew/completions/zsh ]; then zinit fpath -f /usr/local/Ho
 if [ -d /opt/homebrew/completions/zsh ]; then zinit fpath -f /opt/homebrew/completions/zsh; fi
 
 # homebrew shell environment
-if [ -x /usr/local/bin/brew ]; then
+if [ -x /usr/local/bin/brew ] && [ ! -x "$(command -v brew)" ]; then
   eval "$(/usr/local/bin/brew shellenv)"
-elif [ -x /opt/homebrew/bin/brew ]; then
+elif [ -x /opt/homebrew/bin/brew ] && [ ! -x "$(command -v brew)" ]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
