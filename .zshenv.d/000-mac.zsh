@@ -15,6 +15,13 @@ if [[ "$(uname)" == "Darwin" ]]; then
 		fi
 	fi
 
+	# prepend /usr/local/bin
+	if [[ ":$PATH:" != *":/usr/local/bin:"* ]]; then
+		export PATH="/usr/local/bin:${PATH}"
+	fi
+	
+	rehash
+
 	# enable FZF integration if required components exist
 	if [ -x "$(command -v fzf)" ] && [ -x "$(command -v zoxide)" ]; then
 		export ZSH_USE_FZF=1
