@@ -178,4 +178,4 @@ fi
 zinit light Aloxaf/fzf-tab
 
 # use nomatch
-setopt +o nomatch
+setopt nomatch
