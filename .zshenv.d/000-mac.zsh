@@ -5,4 +5,5 @@ if [[ "$(uname)" == "Darwin" ]]; then
 		eval `PATH="" MANPATH="" /usr/libexec/path_helper -s`
 	  rehash
 	fi
+	export TFENV_ARCH=amd64
 fi
