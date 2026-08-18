@@ -1,27 +1,12 @@
 return {
   "nvim-treesitter/nvim-treesitter",
-  event = { "BufReadPre", "BufNewFile" },
+  lazy = false,
   build = ":TSUpdate",
   dependencies = {
     "windwp/nvim-ts-autotag",
   },
   config = function()
-    -- import nvim-treesitter plugin
-    local treesitter = require("nvim-treesitter.configs")
-
-    -- configure treesitter
-    treesitter.setup({ -- enable syntax highlighting
-      highlight = {
-        enable = true,
-      },
-      -- enable indentation
-      indent = { enable = true },
-      -- enable autotagging (w/ nvim-ts-autotag plugin)
-      autotag = {
-        enable = true,
-      },
-      -- ensure these language parsers are installed
-      ensure_installed = {
+    local languages = {
 				"angular",
 				"arduino",
 				"awk",
@@ -75,16 +60,30 @@ return {
 				"vue",
 				"xml",
         "yaml",
-      },
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          init_selection = "<C-space>",
-          node_incremental = "<C-space>",
-          scope_incremental = false,
-          node_decremental = "<bs>",
-        },
-      },
+    }
+
+    require("nvim-treesitter").setup()
+    require("nvim-treesitter").install(languages)
+    require("nvim-ts-autotag").setup()
+
+    local language_set = {}
+    for _, language in ipairs(languages) do
+      language_set[language] = true
+    end
+
+    vim.api.nvim_create_autocmd("FileType", {
+      callback = function(args)
+        local language = vim.treesitter.language.get_lang(args.match)
+        if not language_set[language] then
+          return
+        end
+
+        if not pcall(vim.treesitter.start, args.buf, language) then
+          return
+        end
+
+        vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+      end,
     })
   end,
 }
