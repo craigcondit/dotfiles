@@ -6,7 +6,7 @@ return {
 		"mason-org/mason.nvim",
 		"mason-org/mason-lspconfig.nvim",
 		{ "antosha417/nvim-lsp-file-operations", config = true },
-		{ "folke/neodev.nvim", opts = {} },
+		"folke/lazydev.nvim",
 	},
 	config = function()
 		-- import mason_lspconfig plugin
