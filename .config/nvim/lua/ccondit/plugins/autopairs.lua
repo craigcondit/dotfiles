@@ -20,7 +20,7 @@ return {
 
     -- import nvim-autopairs completion functionality
     local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-		
+
     -- import nvim-cmp plugin (completions plugin)
     local cmp = require("cmp")
 
