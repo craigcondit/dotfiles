@@ -1,5 +1,7 @@
 return {
   "nvim-treesitter/nvim-treesitter",
+  -- The current setup/install API is provided by the main branch.
+  branch = "main",
   lazy = false,
   build = ":TSUpdate",
   dependencies = {

@@ -1,15 +1,12 @@
 return {
 	"neovim/nvim-lspconfig",
-	event = { "BufReadPre", "BufNewFile" },
+	event = "VeryLazy",
 	dependencies = {
 		"hrsh7th/cmp-nvim-lsp",
 		{ "antosha417/nvim-lsp-file-operations", config = true },
 		{ "folke/neodev.nvim", opts = {} },
 	},
 	config = function()
-		-- import lspconfig plugin
-		local lspconfig = require("lspconfig")
-
 		-- import mason_lspconfig plugin
 		local mason_lspconfig = require("mason-lspconfig")
 
@@ -63,7 +60,7 @@ return {
 				keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
 
 				opts.desc = "Restart LSP"
-				keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
+			keymap.set("n", "<leader>rs", "<cmd>LspRestart<CR>", opts) -- mapping to restart lsp if necessary
 			end,
 		})
 
@@ -104,6 +101,7 @@ return {
 		})
 
 		vim.lsp.config("lua_ls", {
+			capabilities = capabilities,
 			settings = {
 				Lua = {
 					-- make the language server recognize "vim" global
@@ -115,6 +113,21 @@ return {
 					},
 				},
 			},
+		})
+
+		vim.lsp.enable({
+			"cssls",
+			"emmet_ls",
+			"golangci_lint_ls",
+			"gopls",
+			"graphql",
+			"html",
+			"java_language_server",
+			"lua_ls",
+			"prismals",
+			"pyright",
+			"svelte",
+			"tailwindcss",
 		})
 	end,
 }

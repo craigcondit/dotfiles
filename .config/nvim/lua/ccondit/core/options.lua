@@ -1,4 +1,4 @@
-vim.cmd("let g:netrw_liststyle = 3")
+vim.g.netrw_liststyle = 3
 
 local opt = vim.opt
 
@@ -34,4 +34,3 @@ opt.clipboard:append("unnamedplus") -- use system clipboard as default regi
 -- split windows
 opt.splitright = true -- split vertical window to the right
 opt.splitbelow = true -- split horizontal window to the bottom
-
