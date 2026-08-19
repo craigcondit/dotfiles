@@ -3,6 +3,8 @@ return {
 	event = "VeryLazy",
 	dependencies = {
 		"hrsh7th/cmp-nvim-lsp",
+		"mason-org/mason.nvim",
+		"mason-org/mason-lspconfig.nvim",
 		{ "antosha417/nvim-lsp-file-operations", config = true },
 		{ "folke/neodev.nvim", opts = {} },
 	},
@@ -115,18 +117,5 @@ return {
 			},
 		})
 
-		vim.lsp.enable({
-			"cssls",
-			"emmet_ls",
-			"golangci_lint_ls",
-			"gopls",
-			"graphql",
-			"html",
-			"lua_ls",
-			"prismals",
-			"pyright",
-			"svelte",
-			"tailwindcss",
-		})
 	end,
 }
