@@ -33,7 +33,7 @@ return {
 				"gopls",
 				"graphql",
 				"html",
-				"java_language_server",
+				"jdtls",
 				"lua_ls",
 				"prismals",
 				"pyright",

@@ -122,7 +122,6 @@ return {
 			"gopls",
 			"graphql",
 			"html",
-			"java_language_server",
 			"lua_ls",
 			"prismals",
 			"pyright",
