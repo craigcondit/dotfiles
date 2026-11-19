@@ -39,13 +39,6 @@ zinit snippet OMZP::command-not-found
 if [ -d /usr/local/Homebrew/completions/zsh ]; then zinit fpath -f /usr/local/Homebrew/completions/zsh; fi
 if [ -d /opt/homebrew/completions/zsh ]; then zinit fpath -f /opt/homebrew/completions/zsh; fi
 
-# homebrew shell environment
-if [ -x /usr/local/bin/brew ] && [ ! -x "$(command -v brew)" ]; then
-  eval "$(/usr/local/bin/brew shellenv)"
-elif [ -x /opt/homebrew/bin/brew ] && [ ! -x "$(command -v brew)" ]; then
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-fi
-
 # prepend /usr/local/bin and /usr/local/sbin
 if [ -d /usr/local/bin ] && [[ "*:$PATH:*" != *":/usr/local/bin:"* ]]; then
 	PATH="/usr/local/bin:${PATH}"
@@ -58,6 +51,13 @@ fi
 if [ ! -d "${HOME}/bin" ]; then mkdir -p "${HOME}/bin" ; fi
 if [[ "*:$PATH:*" != *":${HOME}/bin:"* ]]; then
 	export PATH="${HOME}/bin:${PATH}"
+fi
+
+# homebrew shell environment; run last so brew paths stay ahead of system paths
+if [ -x /opt/homebrew/bin/brew ]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [ -x /usr/local/bin/brew ]; then
+  eval "$(/usr/local/bin/brew shellenv)"
 fi
 
 rehash
